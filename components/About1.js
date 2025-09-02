@@ -44,7 +44,7 @@ export default function Home() {
             <div
               style={{
                 backgroundImage:
-                  "url('https://res.cloudinary.com/dusvquybw/image/upload/v1756827658/front-view-coronavirus-concept_vhmonm.webp')", 
+                  "url('https://res.cloudinary.com/dusvquybw/image/upload/v1756844082/view-person-holding-nebulizer-hand_amvx7k.webp')", 
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 backgroundSize: "cover",

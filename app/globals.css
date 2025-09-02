@@ -1765,6 +1765,13 @@
 }
 
 
+.mycatslid{
+  display: block  ;
+}
+.mycatslid1{
+  display: none  ;
+}
+
 
 @media (min-width: 640px) {
   .mynewparawhite{
@@ -1776,4 +1783,19 @@
    text-align: center !important;
 }
 
+.mycatslid{
+  display: none  ;
 }
+
+.mycatslid1{
+  display: block  ;
+}
+
+}
+
+
+
+
+
+
+

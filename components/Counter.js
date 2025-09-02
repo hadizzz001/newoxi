@@ -6,7 +6,7 @@ import { useInView } from "framer-motion";
 export default function SatisfiedCustomers() {
   const [percent, setPercent] = useState(0);
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" }); // triggers when in viewport
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
     if (!inView) return;
@@ -28,8 +28,10 @@ export default function SatisfiedCustomers() {
         position: "relative",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
-        height: "200px",
+        alignItems: "center", 
+        width: "100vw",  // full viewport width
+        marginTop: "2rem",
+        marginBottom: "2rem",
       }}
     >
       <h1
@@ -38,6 +40,7 @@ export default function SatisfiedCustomers() {
           fontWeight: "bold",
           color: "#d8d0bd",
           position: "relative",
+          textAlign: "center",
           WebkitMaskImage:
             "linear-gradient(to bottom, white 75%, transparent 100%)",
           WebkitMaskRepeat: "no-repeat",

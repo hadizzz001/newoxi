@@ -1,7 +1,8 @@
 // "use client";  
-import { useState, useEffect, useRef } from "react";  
+import { useState, useEffect, useRef } from "react";
 import Catslider from './Catslider';
-import ProductTop from './ProductTop'; 
+import Catslider1 from './Catslider1';
+import ProductTop from './ProductTop';
 import ReviewsSwiper from './ReviewsSwiper';
 import Rate from './Rate';
 import Offer from './Offer';
@@ -17,7 +18,7 @@ import Scrollimage from './Scrollimage';
 
 
 const Body = () => {
- 
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -128,14 +129,23 @@ const Body = () => {
 
         {/* <Box /> */}
 
-        <Carousel /> 
+        <Carousel />
         <TextSlide />
-      <Catslider />
-      <Counter />
-      <About />
-      <Scrollimage />
-      <About1 />
- 
+        {/* Show only on PC */}
+        <div className="mycatslid1">
+          <Catslider />
+        </div>
+
+        {/* Show only on Mobile */}
+        <div className="mycatslid">
+          <Catslider1 />
+        </div>
+
+        <Counter />
+        <About />
+        <Scrollimage />
+        <About1 />
+
 
 
         <style

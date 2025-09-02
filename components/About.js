@@ -1,29 +1,44 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function ShopTheLook() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const [products, setProducts] = useState([]);
+  const router = useRouter();
 
   const firstColImage =
     'https://res.cloudinary.com/dusvquybw/image/upload/v1756155411/white-medical-bandage-marble-table_tuc32m.webp';
 
-  const swiperImage =
-    'https://res.cloudinary.com/dusvquybw/image/upload/v1756141120/top-view-tensiometer-checking-blood-pressure_ihzwe3.webp';
+  // Fetch products and pick random 10
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch('/api/products');
+        const data = await res.json();
+        // Shuffle array and pick 10 items
+        const shuffled = data.sort(() => 0.5 - Math.random());
+        setProducts(shuffled.slice(0, 10));
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <section className="py-10">
       <div className="container mx-auto px-6">
-        {/* Section Title */}
         <h2 className="text-2xl font-bold mb-6">Shop the look</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '70px' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[70px]">
           {/* First Column */}
           <div className="h-[600px]">
             <img
@@ -49,29 +64,27 @@ export default function ShopTheLook() {
               }}
               className="w-full"
             >
-              <SwiperSlide>
-                <img
-                  src={swiperImage}
-                  alt="Product 1"
-                  className="object-cover w-[350px] aspect-square rounded-[10px] mx-auto"
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img
-                  src={swiperImage}
-                  alt="Product 2"
-                  className="object-cover w-[350px] aspect-square rounded-[10px] mx-auto"
-                />
-              </SwiperSlide>
+              {products.map((product) => (
+                <SwiperSlide key={product._id}>
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => router.push(`/product?id=${product._id}`)}
+                  >
+                    <img
+                      src={product.images[0]}
+                      alt={product.title}
+                      className="object-cover w-[350px] aspect-square rounded-[10px] mx-auto"
+                    />
+                    <div className="mt-4 text-center">
+                      <h3 className="text-xl font-semibold">{product.title}</h3>
+                      <p className="text-lg text-gray-700 mt-1">${product.price}</p>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
             </Swiper>
 
-            {/* Title and Price Centered */}
-            <div className="mt-4 text-center">
-              <h3 className="text-xl font-semibold">Product Title</h3>
-              <p className="text-lg text-gray-700 mt-1">$99.99</p>
-            </div>
-
-            {/* Minimal Lucide Arrows Under Title & Price */}
+            {/* Navigation Arrows */}
             <div className="flex gap-4 mt-3">
               <div
                 ref={prevRef}
